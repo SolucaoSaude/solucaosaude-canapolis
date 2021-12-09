@@ -191,21 +191,7 @@ public class SolucaoSaudeUtil {
         }
         return cnpj;
     }
-//
-//    public static String formataCpfCnpj(String doc) {
-//        String docNumero = doc + "";
-//        return (docNumero.length() == 11)
-//                ? SolucaoSaudeUtil.formatarCPF(docNumero)
-//                : SolucaoSaudeUtil.formatarCNPJ(docNumero);
-//    }
-//
-//    public static Boolean isCpfCnpj(String doc){
-//        if (isCPF(doc)){
-//            return true;
-//        }
-//        return isCNPJ(doc);
-//    }
-//
+
     public static ModelAndView validarCamposForm(BindingResult result, String urlRedirect) {
         if (result.hasErrors()) {
             ModelAndView mav = new ModelAndView(urlRedirect);
@@ -228,26 +214,4 @@ public class SolucaoSaudeUtil {
         mav.addObject("msgErros", msg);
         return mav;
     }
-//
-//    public static String loadMailTemplate(String templateName, Map<String, String> parameters) throws IOException {
-//        StringBuilder sb;
-//        try {
-//            if (!StringUtils.isEmpty(templateName)) {
-//                File file = ResourceUtils.getFile("classpath:templates/mail/" + templateName);
-//                String template = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
-//                sb = new StringBuilder(template);
-//                if (!ObjectUtils.isEmpty(parameters)) {
-//                    parameters.entrySet().stream().forEach(e -> {
-//                        String temp = sb.toString().replace(e.getKey(), e.getValue());
-//                        sb.delete(0, sb.length());
-//                        sb.append(temp);
-//                    });
-//                }
-//                return sb.toString();
-//            }
-//            return null;
-//        } catch (IOException e) {
-//            throw e;
-//        }
-//    }
 }

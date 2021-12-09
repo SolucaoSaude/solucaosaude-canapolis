@@ -31,12 +31,6 @@ public class PedidoController extends BaseController {
         return ResponseEntity.ok(super.convertListTo(this.pedidoService.listarTodos(Sort.by(order)), PedidoDTO.class));
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<PedidoDTO> consultarPorId(@PathVariable(value = "id") Integer id) throws DefaultExceptionHandler {
-//        Pedido pedido = this.pedidoService.consultarPorId(id);
-//        return ResponseEntity.ok(super.convertTo(pedido, PedidoDTO.class));
-//    }
-
     @PostMapping(value = "/pesquisar", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<PageDTO<PedidoDTO>> consultarPaginado(@RequestParam(value = "page", defaultValue = "0") Integer page,
                                                                 @RequestParam(value = "size", defaultValue = "10") Integer size,
@@ -51,11 +45,5 @@ public class PedidoController extends BaseController {
         Pedido pedido = this.pedidoService.cadastrar(pedidoDTO);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(pedido.getId()).toUri();
         return ResponseEntity.created(location).body(super.convertTo(pedido, PedidoDTO.class));
-    }
-
-    @DeleteMapping("/{id}")
-    @ResponseStatus(value = HttpStatus.OK)
-    public void deletar(@Valid @PathVariable("id") Integer id) throws DefaultExceptionHandler {
-        this.pedidoService.deletar(id);
     }
 }
