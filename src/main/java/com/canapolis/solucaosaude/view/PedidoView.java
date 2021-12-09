@@ -82,13 +82,6 @@ public class PedidoView extends BaseView {
     public String novoPedido() throws Exception {
         return "tela1";
     }
-//    @RequestMapping(value = "/pedido/novo", method = RequestMethod.GET)
-//    public String novoRegistro(Model model){
-//
-//        /*OBJETO QUE VAMOS ATRIBUIR OS VALORES DOS CAMPOS NA PÁGINA*/
-//        model.addAttribute("pedido", new PedidoDTO());
-//        return "tela3";
-//    }
 
     @RequestMapping(value = "/pedido/salvar-pedido", method = RequestMethod.POST)
     public String salvar(@ModelAttribute

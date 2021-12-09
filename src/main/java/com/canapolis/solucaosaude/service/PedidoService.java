@@ -38,23 +38,6 @@ public class PedidoService extends BaseService {
         return this.pedidoRepository.findAll(sort);
     }
 
-//    public Pedido consultarPorId(final Integer id) throws DefaultExceptionHandler{
-//        if (ObjectUtils.isEmpty(id)) {
-//            throw new DefaultExceptionHandler(HttpStatus.BAD_REQUEST.value(),
-//                    "Operação inválida! O campo 'id' é obrigatório.");
-//        }
-//        try {
-//            return this.pedidoRepository.findById(id).orElseThrow(
-//                    () -> new DefaultExceptionHandler(HttpStatus.NOT_FOUND.value(),
-//                            "Nenhuma informação encontrada para os parâmetros informados.")
-//            );
-//        } catch (DefaultExceptionHandler e) {
-//            throw e;
-//        } catch (Exception e) {
-//            throw new DefaultExceptionHandler(HttpStatus.EXPECTATION_FAILED.value(), e.getMessage());
-//        }
-//    }
-
     public PageDTO<PedidoDTO> consultarPaginado(int page, int size, PedidoDTO pedidoDTO, String keyword) throws DefaultExceptionHandler {
         try {
             PageRequest pageable = PageRequest.of(
@@ -134,23 +117,6 @@ public class PedidoService extends BaseService {
             pedido.setPaciente(paciente);
 
             return this.pedidoRepository.save(pedido);
-        } catch (Exception e) {
-            throw new DefaultExceptionHandler(HttpStatus.EXPECTATION_FAILED.value(), e.getMessage());
-        }
-    }
-
-    @Transactional(rollbackFor = DefaultExceptionHandler.class)
-    public void deletar(final Integer id) throws DefaultExceptionHandler {
-        if (ObjectUtils.isEmpty(id)) {
-            throw new DefaultExceptionHandler(HttpStatus.BAD_REQUEST.value(), "Operação inválida! O campo ID é obrigatório.");
-        }
-        try {
-            Pedido pedido = this.pedidoRepository.findById(id).orElseThrow(
-                    () -> new DefaultExceptionHandler(HttpStatus.NOT_FOUND.value(), "Nenhuma informação encontrada para os parâmetros informados.")
-            );
-            this.pedidoRepository.delete(pedido);
-        } catch (DefaultExceptionHandler e) {
-            throw e;
         } catch (Exception e) {
             throw new DefaultExceptionHandler(HttpStatus.EXPECTATION_FAILED.value(), e.getMessage());
         }
