@@ -178,7 +178,9 @@
 </head>
 <body>
   <div class="container">
-    <div class="title">Cadastro do Pedido</div>
+    <div class="title">
+      <h3>Cadastro do Pedido de Consulta</h3>
+    </div>
     <div class="content">
       <form method="post" th:object="${pedido}" th:action="@{/pedido/salvar-pedido} + '?pacienteId= ' + ${paciente.id}">
         <div class="user-details">
