@@ -26,18 +26,18 @@ public class PacienteController extends BaseController {
     @Autowired
     PacienteService pacienteService;
 
-    @GetMapping
-    public ResponseEntity<List<PacienteDTO>> listarTodos(String order) throws DefaultExceptionHandler {
-        return ResponseEntity.ok(super.convertListTo(this.pacienteService.listarTodos(Sort.by(order)), PacienteDTO.class));
-    }
-
-    @PostMapping(value = "/pesquisar", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<PageDTO<PacienteDTO>> consultarPaginado(@RequestParam(value = "page", defaultValue = "0") Integer page,
-                                                                  @RequestParam(value = "size", defaultValue = "10") Integer size,
-                                                                  @RequestBody(required = false) PacienteDTO paciente) throws DefaultExceptionHandler {
-        PageDTO<PacienteDTO> pacienteDTOPageDTO = this.pacienteService.consultarPaginado(page, size, paciente, null);
-        return ResponseEntity.ok(pacienteDTOPageDTO);
-    }
+//    @GetMapping
+//    public ResponseEntity<List<PacienteDTO>> listarTodos(String order) throws DefaultExceptionHandler {
+//        return ResponseEntity.ok(super.convertListTo(this.pacienteService.listarTodos(Sort.by(order)), PacienteDTO.class));
+//    }
+//
+//    @PostMapping(value = "/pesquisar", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+//    public ResponseEntity<PageDTO<PacienteDTO>> consultarPaginado(@RequestParam(value = "page", defaultValue = "0") Integer page,
+//                                                                  @RequestParam(value = "size", defaultValue = "10") Integer size,
+//                                                                  @RequestBody(required = false) PacienteDTO paciente) throws DefaultExceptionHandler {
+//        PageDTO<PacienteDTO> pacienteDTOPageDTO = this.pacienteService.consultarPaginado(page, size, paciente, null);
+//        return ResponseEntity.ok(pacienteDTOPageDTO);
+//    }
 
     @PostMapping()
     @ResponseStatus(value = HttpStatus.CREATED)

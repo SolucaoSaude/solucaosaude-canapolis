@@ -34,52 +34,52 @@ public class PedidoService extends BaseService {
     @Autowired
     private PacienteRepository pacienteRepository;
 
-    public List<Pedido> listarTodos(Sort sort) throws DefaultExceptionHandler {
-        return this.pedidoRepository.findAll(sort);
-    }
-
-    public PageDTO<PedidoDTO> consultarPaginado(int page, int size, PedidoDTO pedidoDTO, String keyword) throws DefaultExceptionHandler {
-        try {
-            PageRequest pageable = PageRequest.of(
-                    page,
-                    size,
-                    Sort.Direction.ASC, "pedido.postoSaude");
-
-            Page<Pedido> pages;
-            if (!ObjectUtils.isEmpty(keyword)) {
-                pages = this.pedidoRepository.findByKeyword(keyword, pageable);
-            } else if (!ObjectUtils.isEmpty(pedidoDTO)) {
-                pages = this.pedidoRepository.findAll(Example.of(super.convertToModel(pedidoDTO, Pedido.class)), pageable);
-            } else {
-                pages = this.pedidoRepository.findAll(pageable);
-            }
-            if (!pages.isEmpty()) {
-                final int totalElements = (int) pages.getTotalElements();
-                final int totalPages = pages.getTotalPages();
-                final boolean isFirst = pages.isFirst();
-                final boolean isLast = pages.isLast();
-
-                List<PedidoDTO> pedidoDTOList = pages.stream()
-                        .map(entity -> super.convertToDTO(entity, PedidoDTO.class)).collect(Collectors.toList());
-
-                PageDTO<PedidoDTO> pageDTO = new PageDTO<PedidoDTO>();
-                pageDTO.setTotalElements(Integer.valueOf(totalElements));
-                pageDTO.setTotalPages(Integer.valueOf(totalPages));
-                pageDTO.setFirst(isFirst);
-                pageDTO.setLast(isLast);
-                pageDTO.setContent(pedidoDTOList);
-
-                return pageDTO;
-            }
-        } catch (Exception e) {
-            if (e instanceof DefaultExceptionHandler) {
-                throw e;
-            } else {
-                throw new DefaultExceptionHandler(e);
-            }
-        }
-        return null;
-    }
+//    public List<Pedido> listarTodos(Sort sort) throws DefaultExceptionHandler {
+//        return this.pedidoRepository.findAll(sort);
+//    }
+//
+//    public PageDTO<PedidoDTO> consultarPaginado(int page, int size, PedidoDTO pedidoDTO, String keyword) throws DefaultExceptionHandler {
+//        try {
+//            PageRequest pageable = PageRequest.of(
+//                    page,
+//                    size,
+//                    Sort.Direction.ASC, "pedido.postoSaude");
+//
+//            Page<Pedido> pages;
+//            if (!ObjectUtils.isEmpty(keyword)) {
+//                pages = this.pedidoRepository.findByKeyword(keyword, pageable);
+//            } else if (!ObjectUtils.isEmpty(pedidoDTO)) {
+//                pages = this.pedidoRepository.findAll(Example.of(super.convertToModel(pedidoDTO, Pedido.class)), pageable);
+//            } else {
+//                pages = this.pedidoRepository.findAll(pageable);
+//            }
+//            if (!pages.isEmpty()) {
+//                final int totalElements = (int) pages.getTotalElements();
+//                final int totalPages = pages.getTotalPages();
+//                final boolean isFirst = pages.isFirst();
+//                final boolean isLast = pages.isLast();
+//
+//                List<PedidoDTO> pedidoDTOList = pages.stream()
+//                        .map(entity -> super.convertToDTO(entity, PedidoDTO.class)).collect(Collectors.toList());
+//
+//                PageDTO<PedidoDTO> pageDTO = new PageDTO<PedidoDTO>();
+//                pageDTO.setTotalElements(Integer.valueOf(totalElements));
+//                pageDTO.setTotalPages(Integer.valueOf(totalPages));
+//                pageDTO.setFirst(isFirst);
+//                pageDTO.setLast(isLast);
+//                pageDTO.setContent(pedidoDTOList);
+//
+//                return pageDTO;
+//            }
+//        } catch (Exception e) {
+//            if (e instanceof DefaultExceptionHandler) {
+//                throw e;
+//            } else {
+//                throw new DefaultExceptionHandler(e);
+//            }
+//        }
+//        return null;
+//    }
 
     @Transactional(rollbackFor = DefaultExceptionHandler.class)
     public Pedido cadastrar(PedidoDTO pedidoDTO) throws DefaultExceptionHandler {

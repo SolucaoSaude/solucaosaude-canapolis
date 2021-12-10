@@ -32,50 +32,50 @@ public class PedidoView extends BaseView {
     @Autowired
     private PacienteRepository pacienteRepository;
 
-    /*** Busca a lista DE TODOS OS PEDIDOS utilizando a paginação */
-    @RequestMapping(value = "/lista", method = RequestMethod.GET)
-    public String lista(
-            Model model,
-            @RequestParam("page") Optional<Integer> page,
-            @RequestParam("size") Optional<Integer> size) throws DefaultExceptionHandler {
-        return listaPedidos(model, page, size, null, null);
-    }
-
-    private String listaPedidos(Model model, Optional<Integer> page, Optional<Integer> size, PedidoDTO request, String keyword) throws DefaultExceptionHandler {
-        int currentPage = page.orElse(1);
-        int pageSize = size.orElse(5);
-        int totalElementos = 0;
-
-        PageDTO<PedidoDTO> objetoPage = this.pedidoService.consultarPaginado(currentPage - 1, pageSize, request, keyword);
-
-        if (!ObjectUtils.isEmpty(objetoPage)) {
-            int totalPages = objetoPage.getTotalPages().intValue();
-            totalElementos = objetoPage.getTotalElements().intValue();
-            if (totalPages > 0) {
-                List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
-                        .boxed()
-                        .collect(Collectors.toList());
-                model.addAttribute("pageNumbers", pageNumbers);
-                model.addAttribute("totalPages", totalPages);
-                model.addAttribute("pageSize", pageSize);
-                model.addAttribute("currentPage", currentPage);
-            }
-        }
-        model.addAttribute("totalElementos", totalElementos);
-        model.addAttribute("objetoPage", objetoPage);
-
-        return "pedido/pedido";
-    }
-
-    /*** Busca a lista por KEYWORD dos objetos utilizando a paginação */
-    @RequestMapping(value = "/keyword", method = RequestMethod.GET)
-    public String keyword(
-            Model model,
-            @RequestParam("page") Optional<Integer> page,
-            @RequestParam("size") Optional<Integer> size, String keyword) throws DefaultExceptionHandler {
-
-        return listaPedidos(model, page, size, null, keyword);
-    }
+//    /*** Busca a lista DE TODOS OS PEDIDOS utilizando a paginação */
+//    @RequestMapping(value = "/lista", method = RequestMethod.GET)
+//    public String lista(
+//            Model model,
+//            @RequestParam("page") Optional<Integer> page,
+//            @RequestParam("size") Optional<Integer> size) throws DefaultExceptionHandler {
+//        return listaPedidos(model, page, size, null, null);
+//    }
+//
+//    private String listaPedidos(Model model, Optional<Integer> page, Optional<Integer> size, PedidoDTO request, String keyword) throws DefaultExceptionHandler {
+//        int currentPage = page.orElse(1);
+//        int pageSize = size.orElse(5);
+//        int totalElementos = 0;
+//
+//        PageDTO<PedidoDTO> objetoPage = this.pedidoService.consultarPaginado(currentPage - 1, pageSize, request, keyword);
+//
+//        if (!ObjectUtils.isEmpty(objetoPage)) {
+//            int totalPages = objetoPage.getTotalPages().intValue();
+//            totalElementos = objetoPage.getTotalElements().intValue();
+//            if (totalPages > 0) {
+//                List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+//                        .boxed()
+//                        .collect(Collectors.toList());
+//                model.addAttribute("pageNumbers", pageNumbers);
+//                model.addAttribute("totalPages", totalPages);
+//                model.addAttribute("pageSize", pageSize);
+//                model.addAttribute("currentPage", currentPage);
+//            }
+//        }
+//        model.addAttribute("totalElementos", totalElementos);
+//        model.addAttribute("objetoPage", objetoPage);
+//
+//        return "pedido/pedido";
+//    }
+//
+//    /*** Busca a lista por KEYWORD dos objetos utilizando a paginação */
+//    @RequestMapping(value = "/keyword", method = RequestMethod.GET)
+//    public String keyword(
+//            Model model,
+//            @RequestParam("page") Optional<Integer> page,
+//            @RequestParam("size") Optional<Integer> size, String keyword) throws DefaultExceptionHandler {
+//
+//        return listaPedidos(model, page, size, null, keyword);
+//    }
 
     /*** Chama CADASTRO DE UM NOVO PEDIDO */
     @GetMapping("/pedido/novo-pedido")

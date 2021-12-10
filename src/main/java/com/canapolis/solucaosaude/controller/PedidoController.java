@@ -26,18 +26,18 @@ public class PedidoController extends BaseController {
     @Autowired
     PedidoService pedidoService;
 
-    @GetMapping
-    public ResponseEntity<List<PedidoDTO>> listarTodos(String order) throws DefaultExceptionHandler {
-        return ResponseEntity.ok(super.convertListTo(this.pedidoService.listarTodos(Sort.by(order)), PedidoDTO.class));
-    }
-
-    @PostMapping(value = "/pesquisar", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<PageDTO<PedidoDTO>> consultarPaginado(@RequestParam(value = "page", defaultValue = "0") Integer page,
-                                                                @RequestParam(value = "size", defaultValue = "10") Integer size,
-                                                                @RequestBody(required = false) PedidoDTO pedido) throws DefaultExceptionHandler {
-        PageDTO<PedidoDTO> pedidoDTOPageDTO = this.pedidoService.consultarPaginado(page, size, pedido, null);
-        return ResponseEntity.ok(pedidoDTOPageDTO);
-    }
+//    @GetMapping
+//    public ResponseEntity<List<PedidoDTO>> listarTodos(String order) throws DefaultExceptionHandler {
+//        return ResponseEntity.ok(super.convertListTo(this.pedidoService.listarTodos(Sort.by(order)), PedidoDTO.class));
+//    }
+//
+//    @PostMapping(value = "/pesquisar", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+//    public ResponseEntity<PageDTO<PedidoDTO>> consultarPaginado(@RequestParam(value = "page", defaultValue = "0") Integer page,
+//                                                                @RequestParam(value = "size", defaultValue = "10") Integer size,
+//                                                                @RequestBody(required = false) PedidoDTO pedido) throws DefaultExceptionHandler {
+//        PageDTO<PedidoDTO> pedidoDTOPageDTO = this.pedidoService.consultarPaginado(page, size, pedido, null);
+//        return ResponseEntity.ok(pedidoDTOPageDTO);
+//    }
 
     @PostMapping()
     @ResponseStatus(value = HttpStatus.CREATED)
