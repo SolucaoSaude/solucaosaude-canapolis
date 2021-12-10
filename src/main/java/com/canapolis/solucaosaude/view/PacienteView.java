@@ -30,6 +30,11 @@ public class PacienteView extends BaseView {
     @Autowired
     private PacienteRepository pacienteRepository;
 
+    @RequestMapping(value = "/")
+    public String iniciar() {
+        return "tela1";
+    }
+
     @RequestMapping(value = "/novo-paciente", method = RequestMethod.GET)
     public String novoRegistro(Model model){
 
